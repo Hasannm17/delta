@@ -1,3 +1,4 @@
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Url, Url_img, en } from "../hooks";
 import { flexing } from "../utils";
@@ -16,6 +17,22 @@ type ItemSet = {
   items: Item[];
 };
 
+const MemoizedImage = React.memo(
+  ({ src, alt }: { src: string; alt: string }) => (
+    <img
+      className="image"
+      loading="lazy"
+      src={`${Url_img}/${src}`}
+      alt={alt}
+      style={{
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+      }}
+    />
+  )
+);
+
 const Hero = () => {
   const { isPending, error, data } = useQuery<ItemSet[]>({
     queryKey: ["focusdata"],
@@ -31,47 +48,36 @@ const Hero = () => {
         </div>
       </div>
     );
+
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <section className="flex flex-col justify-center items-center mt-20">
-      <div style={{ width: "70%", margin: "auto" }} className="">
+    <section className="flex flex-col justify-center items-center mt-20 ml-14">
+      <div style={{ width: "65%", margin: "auto" }} className="">
         {data && data.length > 0 ? (
-          data.map((itemSet, setIndex) => {
-            return (
-              <div key={setIndex} className="flex  ">
-                {itemSet?.items?.map((item) => (
-                  <div
-                    key={item?.id}
-                    style={{
-                      display: "inline-block",
-                      margin: "8px",
-                      width: `${item.focus_width}%`,
-                      height: "300px",
-                      overflow: "hidden",
-                      position: "relative",
-                    }}
-                    className="cursor-pointer relative hover-div"
-                  >
-                    <img
-                      className="image"
-                      src={`${Url_img}/${item?.img_url}`}
-                      alt={item?.name}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                    />
-
-                    <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white uppercase transition text-lg w4  hover:text-black">
-                      {item?.name}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            );
-          })
+          data.map((itemSet, setIndex) => (
+            <div key={setIndex} className="flex">
+              {itemSet?.items?.map((item) => (
+                <div
+                  key={item?.id}
+                  style={{
+                    display: "inline-block",
+                    margin: "8px",
+                    width: `${item.focus_width}%`,
+                    height: "300px",
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                  className="cursor-pointer relative hover-div"
+                >
+                  <MemoizedImage src={item?.img_url} alt={item?.name} />
+                  <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white uppercase transition text-lg w4  hover:text-black">
+                    {item?.name}
+                  </p>
+                </div>
+              ))}
+            </div>
+          ))
         ) : (
           <div className={`${flexing}`}>
             <p className="w7">No data available</p>

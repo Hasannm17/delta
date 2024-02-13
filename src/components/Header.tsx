@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { flexing } from "../utils";
 import Search from "./Search";
-import Category from "./SubCategory";
+
+
 
 const Header = () => {
   return (
@@ -29,7 +30,7 @@ const Header = () => {
           </div>
         </div>
       </section>
-      <Category />
+     
     </>
   );
 };

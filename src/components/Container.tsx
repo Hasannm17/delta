@@ -21,7 +21,7 @@ interface ContainerProps {
       <div style={{ width: '100%', border: '1px solid black', marginBottom: '20px' }}>
         <div style={{ display: 'flex' }}>
           {imageUrls.map((imageUrl, index) => (
-            <img key={index} src={imageUrl} style={{ width: `${100 / imageCount}%`, padding: '5px' }} alt={`Image ${index}`} />
+            <img loading="lazy" key={index} src={imageUrl} style={{ width: `${100 / imageCount}%`, padding: '5px' }} alt={`Image ${index}`} />
           ))}
         </div>
       </div>

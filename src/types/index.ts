@@ -28,10 +28,20 @@ export type Item = {
   description: string;
   usagee: string;
   weight: string;
-
 };
 
 export type CategoryItems = {
   category: Category;
   items: Item[];
 };
+
+export type videoProps = {
+  ishome: boolean;
+};
+export type AdItem = {
+  id: number;
+  url: string;
+  location: "home_ad" | "banner" | "category_ad";
+};
+
+export type AdList = AdItem[];

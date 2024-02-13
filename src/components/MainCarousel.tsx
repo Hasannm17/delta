@@ -4,6 +4,7 @@ import Button from "./Button";
 import { Url, Url_img, en } from "../hooks";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import Category from "./SubCategory";
 
 type CarouselProps = {
   id: number;
@@ -46,16 +47,19 @@ const MainCarousel = () => {
         {data.map((item, index) => {
           return (
             <div key={index} className="relative">
-              <img src={`${Url_img}/${item?.img_url}`} className="h-[500px] " />
+              <img
+                loading="lazy"
+                src={`${Url_img}/${item?.img_url}`}
+                className="h-[500px] "
+              />
               <Button classes="absolute bottom-10 transfom left-[50%]   ">
-                <Link to={"/1/4"}> 
-                Discover More
-                </Link>
+                <Link to={"/1/4"}>Discover More</Link>
               </Button>
             </div>
           );
         })}
       </Carousel>
+      <Category/>
     </div>
   );
 };

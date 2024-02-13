@@ -76,7 +76,7 @@ const CategoryPage = () => {
         </section>
       </main>
 
-      <AdCampain />
+      <AdCampain ishome={false} />
     </>
   );
 };

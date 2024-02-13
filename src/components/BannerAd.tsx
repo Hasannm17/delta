@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { Url, Url_img, en } from "../hooks";
-import { AdList, videoProps } from "../types";
+import { AdList } from "../types";
 
-
-const AdCampain = ({ ishome }: videoProps) => {
+const BannerAd = () => {
   const { isFetching, error, data } = useQuery<AdList | undefined>({
-    queryKey: ["vdad"],
+    queryKey: ["bad"],
     queryFn: () => fetch(`${Url}/${en}/ads`).then((res) => res.json()),
   });
 
@@ -25,22 +24,17 @@ const AdCampain = ({ ishome }: videoProps) => {
   }
 
   return (
-    <section className="bg-[#f5f5f5] text-center m-14 p-8 rounded-3xl">
-      <h1 className="text-black text-[2rem] w5 my-3 ">AD CAMPAIGN</h1>
-
+    <div className="w-full h-full">
       {data && (
-        <video
-          src={
-            ishome
-              ? `${Url_img}/${data[0]?.url} `
-              : `${Url_img}/${data[2]?.url} `
-          }
-          controls
-          className="w-[400px] h-[400px] max-w-md mx-auto shadow-lg rounded-lg object-cover"
-        ></video>
+        <img
+          src={`${Url_img}/${data?.[1]?.url}`}
+          alt={data?.[1].location}
+          className="w-full h-full object-cover"
+        />
       )}
-    </section>
+      <div className="absolute inset-0 rounded-lg shadow-md"></div>
+    </div>
   );
 };
 
-export default AdCampain;
+export default BannerAd;
