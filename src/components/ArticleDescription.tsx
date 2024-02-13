@@ -1,19 +1,17 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { flexing } from "../utils";
 
 type ProductProps = {
-  name: string;
-  subname: string;
-  active: string;
-  benefits: string;
-  sizes: string;
-  instrunctions: string;
+  name: string | undefined;
+  subname: string | undefined;
+  benefits: string | undefined;
+  sizes: string | undefined;
+  instrunctions: string | undefined;
 };
 
 const ArticleDescription = ({
   name,
   subname,
-  active,
   benefits,
   sizes,
   instrunctions,
@@ -23,8 +21,6 @@ const ArticleDescription = ({
   function activatedView(e: string) {
     setActiveView(e);
   }
-
-  console.log(activeView);
 
   return (
     <>
@@ -64,11 +60,6 @@ const ArticleDescription = ({
             <div className="mt-6 h-[250px]">
               {activeView == "DESCRIPTION" ? (
                 <article className={` max-w-[400px] flex flex-col gap-y-4`}>
-                  <span>
-                    <h1 className="w7 text-sm">Active gradients:</h1>
-                    <p className={``}>{active}</p>
-                  </span>
-
                   <span>
                     <h1 className="w7 text-sm">Benefits:</h1>
                     <p>{benefits}</p>

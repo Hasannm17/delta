@@ -4,7 +4,8 @@ import CategoriesHero from "../components/CategoriesHero";
 import { Url, Url_img, en } from "../hooks";
 import { CategoryItems } from "../types";
 import { flexing } from "../utils";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import Category from "../components/SubCategory";
 
 const CategoryPage = () => {
   let { catname } = useParams();
@@ -36,10 +37,12 @@ const CategoryPage = () => {
         name={data?.category?.name}
         imageurl={`${Url_img}/${data?.category?.img_url}`}
       />
+      <Category/>
       <main className="w-full flex flex-col items-center ">
         <section className="flex flex-wrap justify-center items-center w-[70%] mt-10 ">
           {data && data.items.length > 0 ? (
             data?.items?.map((itemSet, setIndex) => (
+              <Link to={String(itemSet?.id)}>            
               <div className="m-3 " key={setIndex}>
                 <div
                   key={itemSet?.id}
@@ -67,6 +70,7 @@ const CategoryPage = () => {
                   </p>
                 </div>
               </div>
+              </Link>
             ))
           ) : (
             <div className={`${flexing}`}>

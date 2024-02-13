@@ -43,6 +43,7 @@ const MainCarousel = () => {
         stopOnHover
         showThumbs={false}
         interval={3000}
+        swipeable={false}
       >
         {data.map((item, index) => {
           return (
@@ -59,7 +60,7 @@ const MainCarousel = () => {
           );
         })}
       </Carousel>
-      <Category/>
+      <Category />
     </div>
   );
 };

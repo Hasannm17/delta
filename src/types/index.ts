@@ -1,6 +1,6 @@
 export type ProductCardType = {
   image: string;
-  name: string;
+  name: string|undefined;
   sub: string;
 };
 
@@ -32,7 +32,7 @@ export type Item = {
 
 export type CategoryItems = {
   category: Category;
-  items: Item[];
+  items: Item[] ;
 };
 
 export type videoProps = {
