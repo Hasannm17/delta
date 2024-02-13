@@ -26,6 +26,7 @@ const Category = () => {
       className={`${flexing} gap-8 text-white Rubik py-1 w4 text-sm relative`}
       style={{ background: MainColor }}
     >
+      <Link className="hover:text-gray-200 p-2 text-md uppercase" to="/">Home</Link>
       {data?.map((item, index) => (
         <Link
           key={index}
