@@ -2,8 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import { Url, Url_img, en } from "../hooks";
 import { AdList } from "../types";
 
+interface AdProps {
+  id: number;
+  url: string;
+  location: string;
+}
+
+interface AdArr {
+  ads: AdProps[];
+}
+
 const BannerAd = () => {
-  const { isFetching, error, data } = useQuery<AdList | undefined>({
+  const { isFetching, error, data } = useQuery<AdArr>({
     queryKey: ["bad"],
     queryFn: () => fetch(`${Url}/${en}/ads`).then((res) => res.json()),
   });
@@ -23,12 +33,16 @@ const BannerAd = () => {
     return <div>An error has occurred: {error.message}</div>;
   }
 
+
+
+  const banner = data?.ads && data?.ads.find((ads) => ads.location === "banner");
+
   return (
     <div className="w-full h-full">
-      {data && (
+      {banner && (
         <img
-          src={`${Url_img}/${data?.[1]?.url}`}
-          alt={data?.[1].location}
+          src={`${Url_img}/${banner.url}`}
+          alt={banner.location}
           className="w-full h-full object-cover"
         />
       )}
