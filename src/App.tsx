@@ -6,13 +6,13 @@ function App() {
     <>
       <main className="Rubik">
         <Header/> 
+        <section className="min-h-screen">       
         <Routing />
+        </section>
         <Footer/>
       </main>
     </>
   );
 }
-
-//TODO : dont forget to remove the static route on Categoriesitem
 
 export default App;

@@ -6,10 +6,12 @@ import AdCampain from "../components/AdCampain";
 const HomePage = () => {
   return (
     <>
-      <MainCarousel />
-      <Hero />
-      <Star />
-      <AdCampain />
+      <main className="flex flex-col justify-center">
+        <MainCarousel />
+        <Hero />
+        <Star />
+        <AdCampain />
+      </main>
     </>
   );
 };

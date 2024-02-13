@@ -1,12 +1,12 @@
 type CategoriesHero = {
-  name: string;
+  name: string | undefined;
   imageurl: string;
 };
 
 const CategoriesHero = ({ name, imageurl }: CategoriesHero) => {
   return (
     <section
-      className="w-full h-[400px] flex flex-col justify-center items-start gap-y-7 p-10 "
+      className="w-full h-[500px] flex flex-col justify-center items-start gap-y-7 p-10 "
       style={{
         backgroundImage: `url(${imageurl})`,
         backgroundSize: "cover",

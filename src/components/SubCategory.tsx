@@ -5,26 +5,28 @@ import { CategoryProps } from "../types";
 import { Url, en } from "../hooks";
 
 const Category = () => {
-  // const { isPending, error, data } = useQuery<CategoryProps[]>({
-  //   queryKey: ["repoData"],
-  //   queryFn: () =>
-  //     fetch(`${Url}/${en}/categories`).then((res) =>
-  //       res.json()
-  //     ),
-  // });
+  const { isPending, error, data } = useQuery<CategoryProps[]>({
+    queryKey: ["repoData"],
+    queryFn: () => fetch(`${Url}/${en}/categories`).then((res) => res.json()),
+  });
 
-  // if (isPending) return <div className={`${flexing}`}>
-  //   Loading...
-  // </div>;
+  if (isPending)
+    return (
+      <div className="w-full flex justify-center my-9">
+        <div className="loader flex justify-center items-center h-screen">
+          <span className="loader-text">loading</span>
+          <span className="load"></span>
+        </div>
+      </div>
+    );
+  if (error) return "An error has occurred: " + error?.message;
 
-  // if (error) return "An error has occurred: " + error?.message;
-  
   return (
     <section
       className={`${flexing} gap-8 text-white Rubik py-1 w4 text-sm relative`}
       style={{ background: MainColor }}
     >
-      {/* {data?.map((item, index) => (
+      {data?.map((item, index) => (
         <Link
           key={index}
           className="hover:text-gray-200 p-2 text-md"
@@ -32,9 +34,7 @@ const Category = () => {
         >
           {item?.name}
         </Link>
-      ))} */}
-
-      <Link to={"/hasan"}>Hasans</Link>
+      ))}
     </section>
   );
 };
