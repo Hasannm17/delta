@@ -33,6 +33,27 @@ const MemoizedImage = React.memo(
   )
 );
 
+const MemoizedItem = React.memo(
+  ({ item }: { item: Item }) => (
+    <div
+      style={{
+        display: "inline-block",
+        margin: "8px",
+        width: `${item.focus_width}%`,
+        height: "300px",
+        overflow: "hidden",
+        position: "relative",
+      }}
+      className="cursor-pointer relative hover-div"
+    >
+      <MemoizedImage src={item.img_url} alt={item.name} />
+      <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white uppercase transition text-lg w4  hover:text-black">
+        {item.name}
+      </p>
+    </div>
+  )
+);
+
 const Hero = () => {
   const { isPending, error, data } = useQuery<ItemSet[]>({
     queryKey: ["focusdata"],
@@ -58,23 +79,7 @@ const Hero = () => {
           data.map((itemSet, setIndex) => (
             <div key={setIndex} className="flex">
               {itemSet?.items?.map((item) => (
-                <div
-                  key={item?.id}
-                  style={{
-                    display: "inline-block",
-                    margin: "8px",
-                    width: `${item.focus_width}%`,
-                    height: "300px",
-                    overflow: "hidden",
-                    position: "relative",
-                  }}
-                  className="cursor-pointer relative hover-div"
-                >
-                  <MemoizedImage src={item?.img_url} alt={item?.name} />
-                  <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white uppercase transition text-lg w4  hover:text-black">
-                    {item?.name}
-                  </p>
-                </div>
+                <MemoizedItem key={item.id} item={item} />
               ))}
             </div>
           ))
